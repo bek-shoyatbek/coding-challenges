@@ -18,6 +18,8 @@ func main() {
 	case "-w":
 		// TODO: Step three
 		fmt.Printf("%s file has %v words\n", filePath, GetWords(filePath))
+	case "-m":
+		fmt.Printf("%s file has %v characters\n", filePath, GetCharacters(filePath))
 	default:
 		fmt.Printf("%s command not found", action)
 	}
