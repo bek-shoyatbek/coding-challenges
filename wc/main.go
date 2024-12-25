@@ -5,40 +5,20 @@ import (
 	"os"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func main() {
 	args := os.Args[1:]
 	var action, filePath = args[0], args[1]
 	switch action {
 	case "-c":
 		// TODO: Step one completed
-		fmt.Printf("%s file is %v bytes\n", filePath, getBytes(filePath))
+		fmt.Printf("%s file is %v bytes\n", filePath, GetBytes(filePath))
 	case "-l":
 		// TODO: Step two
-		fmt.Printf("%s file consists of %v lines\n", filePath, getLines(filePath))
+		fmt.Printf("%s file consists of %v lines\n", filePath, GetLines(filePath))
+	case "-w":
+		// TODO: Step three
+		fmt.Printf("%s file has %v words\n", filePath, GetWords(filePath))
+	default:
+		fmt.Printf("%s command not found", action)
 	}
-
-}
-
-func getLines(file string) int {
-	numberOfLines := 0
-	data, err := os.ReadFile(file)
-	check(err)
-	for _, b := range data {
-		if string(b) == "\n" {
-			numberOfLines = numberOfLines + 1
-		}
-	}
-	return numberOfLines
-}
-
-func getBytes(file string) int {
-	data, err := os.ReadFile(file)
-	check(err)
-	return len(data)
 }
