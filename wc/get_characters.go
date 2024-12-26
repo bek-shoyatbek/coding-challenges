@@ -8,7 +8,7 @@ import (
 func GetCharacters(filePath string) int {
 	file, err := os.Open(filePath)
 	CheckError(err)
-
+	file.Close()
 	fileScanner := bufio.NewScanner(file)
 
 	fileScanner.Split(bufio.ScanRunes)

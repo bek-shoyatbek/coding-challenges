@@ -1,15 +1,20 @@
 package main
 
-import "os"
+import (
+	"bufio"
+	"os"
+)
 
-func GetLines(file string) int {
+func GetLines(filePath string) int {
 	numberOfLines := 0
-	data, err := os.ReadFile(file)
+	file, err := os.Open(filePath)
 	CheckError(err)
-	for _, b := range data {
-		if string(b) == "\n" {
-			numberOfLines = numberOfLines + 1
-		}
+	defer file.Close()
+	fileScanner := bufio.NewScanner(file)
+
+	fileScanner.Split(bufio.ScanLines)
+	for fileScanner.Scan() {
+		numberOfLines = numberOfLines + 1
 	}
 	return numberOfLines
 }
